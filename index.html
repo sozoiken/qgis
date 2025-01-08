@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Helps the browser identify support for mobile applications -->
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" />
+
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Title on the browser tab -->
+    <title>WebGIS</title>
+    <!-- Leaflet CSS Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+    <!-- Leaflet JavaScript Library -->
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <!-- Style for the fullscreen map display -->
+    <style>
+      html,
+      body,
+      #map {
+        height: 100%;
+        width: 100%;
+        margin: 0%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HTML Block to display the map -->
+    <div id="map"></div>
+    <script>
+      /* Initial Map */
+      //lat, long, zoom (the initial view can be determined from Google Earth)
+      var map = L.map('map').setView([-7.9, 110.45], 10);
+      /* Tile Basemap */
+      var basemap0 = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <ahref="http://www.openstreetmap.org/copyright" > OpenStreetMap</a>',
+      });
+      var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{ x } ', {
+        attribution: 'Tiles & copy; Esri & mdash; Source: Esri, i - cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR - EGP, and the GIS User Community',
+      });
+      var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        maxZoom: 17,
+        attribution:
+          'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+      });
+      OpenTopoMap.addTo(map);
+      Esri_WorldImagery.addTo(map); //Calls the basemap to be displayed when the page is loaded
+      /*Control Layer*/
+      var baseMaps = {
+        /*yang kuning adalah nama yang muncul, yan putih adalah nama variabel*/
+        'Open Street Map': basemap0,
+        'Open Topo Map': OpenTopoMap,
+        'Esri WorldImagery': Esri_WorldImagery,
+      };
+
+      var Layers = {};
+      var layerControl = L.control.layers(baseMaps, Layers, { collapsed: false });
+      layerControl.addTo(map);
+
+      var marker = L.marker([-7.804, 110.3645]); // you can change the coordinate
+      marker.addTo(map);
+      marker.bindPopup('<b>Hello ! </b> <br> Saya pohon');
+      marker.addTo(map);
+      marker.openPopup();
+      marker.bindTooltip('Hallo <br> Saya <b> Purnama </b> dan Adik saya <b> Akbar </b>');
+      // custom marker
+      var customIcon1 = L.icon({
+        iconUrl: 'https://www.freeiconspng.com/uploads/maps-icon-11.png',
+        iconSize: [40, 40],
+      });
+      var marker0 = L.marker([-7.6874832621204545, 110.41543590276083], { icon: customIcon1 });
+      marker0.addTo(map);
+
+      var marker1 = L.marker([-7.755302135517697, 110.37731252107345], { icon: customIcon1 });
+      marker1.addTo(map);
+      marker1.bindPopup('Laras Minimarket');
+      marker1.bindTooltip('69VG+JH3, Jl. Pandega Marta, Pogung Lor, Sinduadi, Kec. Mlati, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281');
+      marker1.addTo(map);
+      marker.openPopup();
+
+      var marker2 = L.marker([-7.703892540982454, 110.43301266822158], { icon: customIcon1 });
+      marker2.addTo(map);
+      marker2.bindPopup('Cozy Minimarket');
+      marker2.bindTooltip('Jalan Besi Jangkang KM 2, Ngaglik, Losari Sukoharjo, Karanglo, Sukoharjo, Kec. Ngaglik, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55581');
+      marker2.addTo(map);
+      marker.openPopup();
+
+      var marker3 = L.marker([-7.711010372964948, 110.34494648356295], { icon: customIcon1 });
+      marker3.addTo(map);
+      marker3.bindPopup('Mas Swalayan');
+      marker3.bindTooltip('Jl. Dr. Radjimin No.40, Paten, Tridadi, Kec. Sleman, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55511');
+      marker3.addTo(map);
+      marker.openPopup();
+
+      var marker4 = L.marker([-7.685747304584631, 110.4188854602699], { icon: customIcon1 });
+      marker4.addTo(map);
+      marker4.bindPopup('Alfamart');
+      marker4.bindTooltip('Kaliurang St No.Km 14,5, Lodadi, Umbulmartani, Ngemplak, Sleman Regency, Special Region of Yogyakarta 55584');
+      marker4.addTo(map);
+      marker.openPopup();
+
+      var marker5 = L.marker([-7.67298766515001, 110.34444361424576], { icon: customIcon1 });
+      marker5.addTo(map);
+      marker5.bindPopup('Minimarket Al Madina');
+      marker5.bindTooltip('88GV+HQ6, Sidomulyo, Trimulyo, Kec. Sleman, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55513');
+      marker.openPopup();
+
+      var marker6 = L.marker([-7.659542543483644, 110.39491918356299], { icon: customIcon1 });
+      marker6.addTo(map);
+      marker6.bindPopup('Alfamart Purwobinangun Sleman');
+      marker6.bindTooltip('Jl. Palagan Tentara Pelajar No.Km.16, RT.003/RW.024, Glondong, Purwobinangun, Kec. Pakem, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55582');
+      marker.openPopup();
+
+      var marker7 = L.marker([-7.6828516398017355, 110.41201260685604], { icon: customIcon1 });
+      marker7.addTo(map);
+      marker7.bindPopup('Zhazha mart');
+      marker7.bindTooltip('8C86+RWC, Unnamed Road, Krawitan, Umbulmartani, Kec. Ngemplak, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55584');
+      marker.openPopup();
+
+      var marker8 = L.marker([-7.696427155393529, 110.43314458356302], { icon: customIcon1 });
+      marker8.addTo(map);
+      marker8.bindPopup('RheMart');
+      marker8.bindTooltip('8C5M+GFM, Tanjungsari, Sukoharjo, Kec. Ngaglik, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55581=');
+      marker.openPopup();
+
+      var marker9 = L.marker([-7.660203179575157, 110.40732105288025], { icon: customIcon1 });
+      marker9.addTo(map);
+      marker9.bindPopup('Alfamart Harjobinangun Sleman');
+      marker9.bindTooltip('Jl. Raya Turi No.23, Plembon, Pakembinangun, Kec. Pakem, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55582');
+      marker.openPopup();
+
+      var marker10 = L.marker([-7.668051458240728, 110.428453483563], { icon: customIcon1 });
+      marker10.addTo(map);
+      marker10.bindPopup('Indomaret Pokoh Sleman TGKW');
+      marker10.bindTooltip('Jl. Cangkringan No.22, Kregan, Umbulmartani, Kec. Ngemplak, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55584');
+      marker.openPopup();
+    </script>
+  </body>
+</html>
